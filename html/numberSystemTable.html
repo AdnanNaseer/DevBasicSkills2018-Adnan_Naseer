@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Final Project-Adnan Naseer</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="../js/numberconversion.js"></script>
+</head>
+<body onload="printNumberSystemChart(50)" style="background-image: url('../assets/images/bg_image_3.jpg');">
+
+        <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                  <div class="navbar-header">
+                    <a class="navbar-brand" href="../index.html">Matematiikka</a>
+                  </div>
+                  <ul class="nav navbar-nav">
+                      <li><a href="numberConversion.html">Number System Conversions</a></li>
+                      <li class="active"><a href="#">Number System Table</a></li>
+                      <li><a href="combinatorics.html">Combinatorics</a></li>
+                      <li><a href="truthTable.html">Truth Tables</a></li>
+                      <li><a href="#">Random Value</a></li>
+                    </ul>
+                </div>
+              </nav>
+<div class="container">
+  <div class="row">
+      <div class="col-md-10">
+            <h3>Decimal,Binary,Octal,Hexadecimal Number System Table</h3>
+      </div>
+      <div class="col-md-2">
+            <button class="btn btn-danger" style="margin-top: 10%;margin-bottom: 10%;" onclick="clearTable()">Clear Table</button>
+      </div>
+  </div>
+  <div class="row">
+        <table class="table table-bordered" id="numberSystemTable">
+            <thead>
+                <tr>
+                    <th>Decimal</th>
+                    <th>Binary</th>
+                    <th>Octal</th>
+                <th>Hexadecimal</th>
+            </tr>
+            </thead>
+            <tbody>     
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>
