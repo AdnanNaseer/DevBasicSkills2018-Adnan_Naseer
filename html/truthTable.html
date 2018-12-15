@@ -27,21 +27,52 @@
 </nav>
   
 <div class="container">   
-    <div class="form-inline">
-        <div class="form-group">
-          <label for="vars">Variables (comma separated)</label>
-          <input type="text" class="form-control" id="vars">
-        </div>
-        <div class="form-group">
-          <label for="expression">Expression (a|b):</label>
-          <input type="text" class="form-control" id="expression">
-        </div>
-     
-        <button class="btn btn-success" id="getResult" onclick="getData()">Generate truth table</button>
+    <div class="row" style="text-align: center">
+      <div class="col-md-4">
+        <button class="btn btn-info" onclick="printAndTable()">Print And table</button>
+        <table style="background-color: ghostwhite" class="table table-bordered" id="andTable">
+            <thead>
+                <tr>
+                    <th>Operand A</th>
+                    <th>Operand B</th>
+                    <th>A &AMP; B</th>
+            </tr>
+            </thead>
+            <tbody>     
+            </tbody>
+        </table>
       </div>
 
+      <div class="col-md-4">
+          <button class="btn btn-success" onclick="printOrTable()">Print OR table</button>
+          <table style="background-color: ghostwhite" class="table table-bordered" id="orTable">
+              <thead>
+                  <tr>
+                      <th>Operand A</th>
+                    <th>Operand B</th>
+                    <th>A &VerticalBar; B</th>
+              </tr>
+              </thead>
+              <tbody>     
+              </tbody>
+          </table>
+        </div>
 
-    <div id="result"></div>
+        <div class="col-md-4">
+            <button class="btn btn-danger" onclick="printNotTable()">Print Not table</button>
+            <table style="background-color: ghostwhite" class="table table-bordered" id="notTable">
+                <thead>
+                    <tr>
+                        <th>Operand A</th>
+                        <th>!A</th>
+                </tr>
+                </thead>
+                <tbody>     
+                </tbody>
+            </table>
+          </div>
+    </div>
+    
 </div>
 
 </body>

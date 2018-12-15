@@ -1,128 +1,90 @@
-function getData(){
-        vars = document.getElementById('vars').value.split(',');
-        expressions = document.getElementById('expression').value.split(',');        
-        var len = vars.length
-            ,splitBy = Math.round(len/2)
-            ,trueSet
-            ,trues = []
-            ,falses = []
-            ,truthData = [];
-        if(len>=7){
-            alert('Error! Maximum 4 values can be evaluated.');
-            return;
-        }
-        truthData.push(truth(vars, vars, true));
-        for(var i=1; i<=splitBy; i++) {
-            trueSet = reduceToCombinations(permut(vars, i));
-            
-            trueSet.forEach((truthSrc)=>{
-                trues = truth(vars, truthSrc);
-                truthData.push(trues);
-            });
-            
-            
-        }
-        truthData.push(truth(vars, vars));
-        writeTruthTable(truthData);
+function printAndTable(){
+    var table = document.getElementById("andTable");
+    for(var i=0;i<4;i++){
+        var row = table.insertRow(-1);
+        var a = row.insertCell(0);
+        var b = row.insertCell(1);
+		var aAndb = row.insertCell(2);
+		var ans;
+		switch(i){
+			case 0:
+				a.innerHTML = "<strong>"+true+"</strong>";
+				b.innerHTML = "<strong>"+false+"</strong>";
+				ans=true&&false;
+				aAndb.innerHTML = "<strong>"+ ans +"</strong>";
+				break;
+			case 1:
+				a.innerHTML = "<strong>"+false+"</strong>";
+				b.innerHTML = "<strong>"+true+"</strong>";
+				ans=false&&true;
+				aAndb.innerHTML = "<strong>"+ans+"</strong>";
+				break;
+			case 2:
+				a.innerHTML = "<strong>"+false+"</strong>";
+				b.innerHTML = "<strong>"+false+"</strong>";
+				ans=false&&false;
+				aAndb.innerHTML = "<strong>"+ans+"</strong>";
+				break;
+			case 3:
+				a.innerHTML = "<strong>"+true+"</strong>";
+				b.innerHTML = "<strong>"+true+"</strong>";
+				ans=true&&true;
+				aAndb.innerHTML = "<strong>"+ans+"</strong>";			
+				break;
+		}
     }
-
-function truth(set, truths, reverse) {
-	var w = {};
-	
-	set.forEach(v=>w[v]=(truths.indexOf(v)>=0 ? true : false)^reverse);
-	
-	return w;
 }
 
-function reduceToCombinations(arr) {
-	var i=1
-		,lastEl;
-
-	arr = arr.map(v=>{return v.split('').sort().join('')}).sort();
-	
-	lastEl = arr[0];
-	while(i<arr.length) {
-		if(arr[i] == lastEl) {
-			arr.splice(i,1);
-		} else {
-			lastEl = arr[i];
-			i++;
-		}
-	}
-	
-	arr = arr.map(v=>{return v.split('')});
-	
-	return arr;
-}
-
-function writeTruthTable(truthData) {
-	var table = '<table class="table table-striped">'
-		,keys
-		,vals
-		,exprRes;
+function printOrTable(){
+    var table = document.getElementById("orTable");
+    for(var i=0;i<4;i++){
+        var row = table.insertRow(-1);
+        var a = row.insertCell(0);
+        var b = row.insertCell(1);
+		var aOrb = row.insertCell(2);
 		
-	table += '<thead><tr>';
-	vars.forEach(v=>{
-		table += '<th>';
-		table += v;
-		table += '</th>';
-	});
-	expressions.forEach(v=>{
-		table += '<th>';
-		table += v;
-		table += '</th>';
-	});
-	table += '</tr></thead>';
-	
-	truthData.forEach((v)=> {
-		vals = [];
-		keys = [];
-		table += '<tr>';
-		console.log(v);
-		for(i in v){
-			vals.push(v[i]);
-			keys.push(i);
-			table += '<td>';
-			table += v[i];
-			table += '</td>';
-		};
-		for(var i = 0; i<keys.length; i++) {
-			eval(`var ${keys[i]} = ${vals[i]};`);
+		switch(i){
+			case 0:
+				a.innerHTML = "<strong>"+true+"</strong>";
+				b.innerHTML = "<strong>"+false+"</strong>";
+				aOrb.innerHTML = "<strong>"+true||false+"</strong>";
+				break;
+			case 1:
+				a.innerHTML = "<strong>"+false+"</strong>";
+				b.innerHTML = "<strong>"+true+"</strong>";
+				aOrb.innerHTML = "<strong>"+false||true+"</strong>";
+				break;
+			case 2:
+				a.innerHTML = "<strong>"+false+"</strong>";
+				b.innerHTML = "<strong>"+false+"</strong>";
+				aOrb.innerHTML = "<strong>"+false||false+"</strong>";
+				break;
+			case 3:
+				a.innerHTML = "<strong>"+true+"</strong>";
+				b.innerHTML = "<strong>"+true+"</strong>";
+				aOrb.innerHTML = "<strong>"+true||true+"</strong>";		
+				break;
 		}
-		expressions.forEach((expr)=>{
-			// exprRes = eval(expr);
-			table += `<td>`;
-			table += exprRes ? 'T' : 'F';
-			table += '</td>';
-		});
-		
-		table += '</tr>';
-	});
-	
-	table += '</table>';
-	
-	document.getElementById('result').innerHTML = table;
+    }
 }
 
-function permut(arr, c) {
-	var buf = []
-		,len
-		,arrSlice
-		,permArr
-		,proArr;
-	if(c<=1) {
-		return arr;
-	} else {
-		len = arr.length;
-		for(var i=0;i<len;i++) {
-			arrSlice = arr.slice(0,i).concat(arr.slice(i+1));
-			permArr = permut(arrSlice,c-1);
-			proArr = [];
-			for(var y=0; y<permArr.length; y++) {
-				proArr.push([arr[i]].concat(permArr[y]).join(''));
-			}
-			buf.push(...proArr);
+
+function printNotTable(){
+    var table = document.getElementById("notTable");
+    for(var i=0;i<2;i++){
+        var row = table.insertRow(-1);
+        var a = row.insertCell(0);
+        var b = row.insertCell(1);
+		
+		switch(i){
+			case 0:
+				a.innerHTML = "<strong>"+true+"</strong>";
+				b.innerHTML = "<strong>"+!true+"</strong>";
+				break;
+			case 1:
+				a.innerHTML = "<strong>"+false+"</strong>";
+				b.innerHTML = "<strong>"+!false+"</strong>";
+				break;
 		}
-	}
-	return buf;
+    }
 }
